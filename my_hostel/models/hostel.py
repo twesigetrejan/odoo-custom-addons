@@ -1,4 +1,3 @@
-from odoo import fields, models
 
 from odoo import api, fields, models
 
@@ -37,27 +36,19 @@ class Hostel(models.Model):
                 name = f'{name} ({record.hostel_code})'
             record.display_name = name
 
+
+
 # class HostelRoom(models.Model):
 #     _name = 'hostel.room'
 #     _description = 'Information about a hostel room'
-#     _order = 'id desc, name'
+#     _order = 'id desc, room_code'
 #     _rec_name = 'room_code'
 
-#     currency_id = fields.Many2one('res.currency', string='Currency')
-#     rent_amount = fields.Monetary(string='Rent Amount', currency_field='currency_id', help='Enter monthly rent amount for the room')
-
-
-class HostelRoom(models.Model):
-    _name = 'hostel.room'
-    _description = 'Information about a hostel room'
-    _order = 'id desc, room_code'
-    _rec_name = 'room_code'
-
-    room_code = fields.Char(string='Room Code', required=True, help='Unique code for the room')
-    hostel_id = fields.Many2one('hostel.hostel', string='Hostel', required=True)
-    floor_number = fields.Integer(string='Floor Number')
-    capacity = fields.Integer(string='Capacity', help='Number of occupants the room can hold')
-    rent_amount = fields.Monetary(string='Rent Amount', currency_field='currency_id')
-    currency_id = fields.Many2one('res.currency', string='Currency', required=True)
-    active = fields.Boolean(string='Active', default=True)
-    notes = fields.Text(string='Notes')
+#     room_code = fields.Char(string='Room Code', required=True, help='Unique code for the room')
+#     hostel_id = fields.Many2one('hostel.hostel', string='Hostel', required=True)
+#     floor_number = fields.Integer(string='Floor Number')
+#     capacity = fields.Integer(string='Capacity', help='Number of occupants the room can hold')
+#     rent_amount = fields.Monetary(string='Rent Amount', currency_field='currency_id')
+#     currency_id = fields.Many2one('res.currency', string='Currency', required=True)
+#     active = fields.Boolean(string='Active', default=True)
+#     notes = fields.Text(string='Notes')
