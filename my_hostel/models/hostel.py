@@ -27,7 +27,8 @@ class Hostel(models.Model):
     other_info = fields.Text(string='Other information', help='Additional information about the hostel')
     description = fields.Html('Description')
     hostel_rating = fields.Float(string='Hostel average rating', digits=(14, 4), help='Average rating of the hostel based on user feedback')
-    
+    categoy_id = fields.Many2one('hostel.category')
+
     @api.depends('hostel_code')
     def _compute_display_name(self):
         for record in self:
@@ -35,7 +36,6 @@ class Hostel(models.Model):
             if record.hostel_code:
                 name = f'{name} ({record.hostel_code})'
             record.display_name = name
-
 
 
 # class HostelRoom(models.Model):
