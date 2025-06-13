@@ -10,7 +10,7 @@ class HostelCategory(models.Model):
     
     name = fields.Char('Hostel category')
     
-    parent_id = fields.Many2One(
+    parent_id = fields.Many2one(
         'hostel.category',
         string = 'Parent Category',
         ondelete = 'restrict',

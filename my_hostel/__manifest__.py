@@ -22,6 +22,7 @@
         'security/ir.model.access.csv',
         'views/hostel.xml',
         'views/hostel_room.xml',
+        'views/hostel_category.xml',
     ],
     'assets': {
         'web.assets_backend': [
