@@ -28,6 +28,11 @@ class Hostel(models.Model):
     description = fields.Html('Description')
     hostel_rating = fields.Float(string='Hostel average rating', digits=(14, 4), help='Average rating of the hostel based on user feedback')
     categoy_id = fields.Many2one('hostel.category')
+    ref_doc_id = fields.Reference(
+        selection='_referencable_models',
+        string='Reference Document',
+        help='Reference to a document related to the hostel'
+    )
 
     @api.depends('hostel_code')
     def _compute_display_name(self):
@@ -36,7 +41,12 @@ class Hostel(models.Model):
             if record.hostel_code:
                 name = f'{name} ({record.hostel_code})'
             record.display_name = name
-
+            
+    @api.model
+    def _referencable_models(self):
+        models = self.env['ir.model'].search([('field_id.name', '=', 'message_ids')])
+        return [(x.model, x.name) for x in models]
+    
 
 # class HostelRoom(models.Model):
 #     _name = 'hostel.room'

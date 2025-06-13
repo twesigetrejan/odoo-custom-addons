@@ -6,6 +6,8 @@ class HostelStudent(models.Model):
     _description = 'Information about a hostel student'
     _order = 'id desc, name'
     _rec_name = 'student_code'
+    _inherits= {'res.partner': 'partner_id'}
+    
 
     hostel_id = fields.Many2one('hostel.hostel', related='room_id.hostel_id')
     student_code = fields.Char(string='Student Code', help='Unique code for the student')
@@ -16,6 +18,8 @@ class HostelStudent(models.Model):
     admission_date = fields.Date(default=fields.Datetime.today, string='Admission Date', help='Date when the student was admitted to the hostel')
     discharge_date = fields.Date(string='Discharge Date', help='Date when the student left the hostel')
     duration = fields.Integer(string='Duration', compute='_compute_check_duration', store=True, help='Duration of stay in the hostel in days', inverse='_inverse_duration')
+
+    partner_id = fields.Many2one('res.partner', ondelete='cascade', ) #or without the inherit, use delegate=True to inherit fields from res.partner
 
     @api.depends('admission_date', 'discharge_date')
     def _compute_check_duration(self):
@@ -34,7 +38,8 @@ class HostelStudent(models.Model):
 
 
 
-                    
+
+
 # from odoo import models, fields, api
 
 # class HostelStudent(models.Model):
